@@ -1,0 +1,16 @@
+<p> Welcome  <b>{{ username }}</b> from <b>{{ user.location }}</b></p>
+<p><b>{{ book.title }}</b><br/>
+  <img src="{{ book.imgs }}">
+  Isbn:{{book.isbn }}  Author:{{book.author}}<br/>
+  Rating: {{ rating }} <br/>
+  <a href= 'comment/'> Comment</a>
+</p>
+<p><b>Comments  by users: </b><br/>
+{% for comment in comments %}
+  <p>
+  <a href='comment/{{ comment.id }}'> {{ comment.title }}</a> <br/>
+  {{ comment.body }} <br/>
+  {{ comment.user }} : {{ comment.date }}</p>
+{% endfor %}
+</p>
+<a href = '{% url django.contrib.auth.views.logout %}'>Logout</a>
