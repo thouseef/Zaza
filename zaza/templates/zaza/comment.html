@@ -1,10 +1,5 @@
-{% block title %}Comment{% endblock %}
 
-{% block content %}
-  <h1>Comment</h1>
-
-  <form action="" method="post">
+  <form action="comment/" name="comment" method="POST">
       {{ form.as_p }}
-      <input type="submit" value="Comment">
+      <input type="submit" id="submit" class="submit" value="Comment">
   </form>
-{% endblock %}

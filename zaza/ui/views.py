@@ -75,6 +75,10 @@ def book_view(request, isbn):
   context['comments'] = book.comments_set.order_by('date')
   return render_to_response("zaza/book.html",context)
 
+def add_rating(request, isbn, rating):
+  pass
+
+
 @login_required
 def add_comment(request, isbn):
   if request.method == 'POST':
@@ -93,14 +97,18 @@ def edit_comment(request, isbn, id):
   book = Book.objects.get(isbn = isbn)
   user = request.user
   comment = book.comments_set.get(id=id)
-  if request.method == 'POST':
-    form = CommentsForm(request.POST,instance = comment)
-    if form.is_valid():
-      form.save()
-      return HttpResponseRedirect("/book/"+isbn)
-  else:
-    form = CommentsForm(instance = comment)
-  return render_to_response("zaza/comment.html",{'form':form})
+  if request.GET.get("action","edit") == 'edit':
+    if request.method == 'POST':
+      form = CommentsForm(request.POST,instance = comment)
+      if form.is_valid():
+        form.save()
+        return HttpResponseRedirect("/book/"+isbn)
+    else:
+      form = CommentsForm(instance = comment)
+      return render_to_response("zaza/comment.html",{'form':form})
+  elif request.GET.get("action","edit") == 'delete':
+    comment.delete()
+    return HttpResponse("")
 
 def results_search():
   pass

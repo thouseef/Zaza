@@ -44,6 +44,7 @@ MEDIA_URL = ''
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
 AUTH_PROFILE_MODULE = 'ui.UserProfile'
+STATIC_DOC_ROOT = '/Users/thouseefhameed/Development/Main Project/thsf_project/zaza/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.

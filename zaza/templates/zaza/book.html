@@ -1,16 +1,27 @@
-<p> Welcome  <b>{{ username }}</b> from <b>{{ user.location }}</b></p>
+<head>
+  <script type="text/javascript" src="/static/js/jquery-1.1.4.js"></script>
+  <script type="text/javascript" src="/static/js/scripts.js"></script>
+</head>
+<p> Welcome <b>{{ username }}</b> from <b>{{ user.location }}</b></p>
 <p><b>{{ book.title }}</b><br/>
   <img src="{{ book.imgs }}">
   Isbn:{{book.isbn }}  Author:{{book.author}}<br/>
-  Rating: {{ rating }} <br/>
-  <a href= 'comment/'> Comment</a>
+  <div class = "rating">Rating: {{ rating }}  <br/></div>
+  <button type="button" id="a">Comment</button>
 </p>
+<div id="commentForm"> </div>
 <p><b>Comments  by users: </b><br/>
+  <div id="comments">
 {% for comment in comments %}
   <p>
-  <a href='comment/{{ comment.id }}'> {{ comment.title }}</a> <br/>
-  {{ comment.body }} <br/>
-  {{ comment.user }} : {{ comment.date }}</p>
+    <div id='{{comment.id}}'>
+    <a href='comment/{{ comment.id }}'> {{ comment.title }}</a>
+    <button type="button" class="delete">delete</button> <br/>
+	 {{ comment.body }} <br/>
+	 {{ comment.user }} : {{ comment.date }}
+    </div>
+  </p>
 {% endfor %}
+</div>
 </p>
 <a href = '{% url django.contrib.auth.views.logout %}'>Logout</a>
