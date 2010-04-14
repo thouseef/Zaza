@@ -1,12 +1,13 @@
 <head>
-  <script type="text/javascript" src="/static/js/jquery-1.1.4.js"></script>
+  <script type="text/javascript" src="/static/js/jquery-1.4.2.js"></script>
   <script type="text/javascript" src="/static/js/scripts.js"></script>
 </head>
 <p> Welcome <b>{{ username }}</b> from <b>{{ user.location }}</b></p>
 <p><b>{{ book.title }}</b><br/>
   <img src="{{ book.imgs }}">
   Isbn:{{book.isbn }}  Author:{{book.author}}<br/>
-  <div class = "rating">Rating: {{ rating }}  <br/></div>
+    <div id="rating" class="rateMe" title="Rate Me...">Rating: {{ rating }}
+  </div>
   <button type="button" id="a">Comment</button>
 </p>
 <div id="commentForm"> </div>

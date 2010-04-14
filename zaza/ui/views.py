@@ -65,19 +65,30 @@ def book_view(request, isbn):
   context = {}
   user = request.user.get_profile()
   book = Book.objects.get(isbn = isbn)
-  if user.isBookRated(isbn):
-    context['rating'] = user.getBookRating(isbn)
-  else:
-    context['rating'] = "You haven't yet rated this book."
   context['username'] = request.user
   context['user'] = user
   context['book'] = book
   context['comments'] = book.comments_set.order_by('date')
   return render_to_response("zaza/book.html",context)
 
-def add_rating(request, isbn, rating):
-  pass
+def view_rating(request, isbn):
+  context = {}
+  user = request.user.get_profile()
+  book = Book.objects.get(isbn = isbn)
+  if user.isBookRated(isbn):
+    context['rating'] = user.getBookRating(isbn)
+  else:
+    context['rating'] = 0
+  return render_to_response("zaza/rating.html",context)
 
+@login_required
+def add_rating(request, isbn, rating):
+  user = request.user
+  rating_obj = user.rating_set.get(book__isbn=isbn)
+  rating_obj.rating = rating
+  rating_obj.save()
+  return HttpResponseRedirect("/book/"+isbn+"/rating")
+  
 
 @login_required
 def add_comment(request, isbn):
