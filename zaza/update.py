@@ -1,15 +1,15 @@
 from django.core.management import setup_environ
-from zaza import settings
-from zaza.ui.models import *
+import settings
+setup_environ(settings)
+from ui.models import *
 import time
 
-setup_environ(settings)
-
 while True:
-  users = User.objects.filter(stale=True)
-  for user in users:
-    print "Updating recommendations for %s" % user.username
-    user.storeRecommendations()
-    user.stale = False
-    user.save()
+  users = UserProfile.objects.filter(stale=True)
+  for userp in users:
+    print "Updating recommendations for %s" % userp.user.username
+    r =  userp.storeRecommendations()
+    print "New recommendations are %s,%s,%s,%s,%s" % (r.rec1.isbn, r.rec2.isbn, r.rec3.isbn, r.rec4.isbn, r.rec5.isbn)
+    userp.stale = False
+    userp.save()
   time.sleep(10)

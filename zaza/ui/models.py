@@ -1,7 +1,7 @@
 import operator
 import math
 from django.db import models
-from django.forms import ModelForm
+from django.forms import ModelForm, CharField, IntegerField
 from django.contrib.auth.models import User
 from django.forms.models import inlineformset_factory
 from django.db.models import Avg, Count
@@ -44,7 +44,7 @@ class UserProfile(models.Model):
     for i in range(50):
       threshold = i
       users = getSimilarUsers_(books, threshold)
-      if users.count() < 10:
+      if users.count() < 20:
         break
     print "Number of similar users is %s with threshold %s" % (users.count(), threshold)
     for user in users:
@@ -74,6 +74,8 @@ class UserProfile(models.Model):
       for book in user2.get_profile().getBooks():
         books[book] = True
     for book in books.iterkeys():
+      if self.isBookRated(book):
+        continue
       bookScores[book] = self.getMeanRating()
       for user2, weight in similarUsers.iteritems():
         if user2 == self.user or not user2.get_profile().isBookRated(book):
@@ -86,24 +88,33 @@ class UserProfile(models.Model):
   def storeRecommendations(self):
     print "Generating recommendations for user %s" % self.user.username
     books = self.getRecommendations()
-    recommends = models.Recommends()
+    recommends = Recommends.objects.filter(user__username=self.user.username)
+    if len(recommends) < 1:
+      recommends = Recommends()
+    else:
+      recommends = recommends[0]
     recommends.user = self.user
     if len(books) >= 1:
-      recommends.rec1 = models.Book.objects.get(isbn__exact=books[0])
+      recommends.rec1 = Book.objects.get(isbn__exact=books[0])
     if len(books) >= 2:
-      recommends.rec2 = models.Book.objects.get(isbn__exact=books[1])
+      recommends.rec2 = Book.objects.get(isbn__exact=books[1])
     if len(books) >= 3:
-      recommends.rec3 = models.Book.objects.get(isbn__exact=books[2])
+      recommends.rec3 = Book.objects.get(isbn__exact=books[2])
     if len(books) >= 4:
-      recommends.rec4 = models.Book.objects.get(isbn__exact=books[3])
+      recommends.rec4 = Book.objects.get(isbn__exact=books[3])
     if len(books) >= 5:
-      recommends.rec5 = models.Book.objects.get(isbn__exact=books[4])
+      recommends.rec5 = Book.objects.get(isbn__exact=books[4])
     recommends.save()
+    return recommends
     
 
 class UserForm(ModelForm):
+  password = CharField(max_length=16)
+  location = CharField(max_length=128)
+  age = IntegerField()
   class Meta:
     model = User
+    fields = ('username', 'first_name', 'last_name', 'email')
 
 
 class Book(models.Model):

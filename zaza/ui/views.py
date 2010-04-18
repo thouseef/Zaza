@@ -39,7 +39,20 @@ def user_reg(request):
   if request.method == 'POST':
     form = UserForm(request.POST)
     if form.is_valid():
-      new_user = form.save()
+      data = form.cleaned_data
+      user = User.objects.create_user(data['username'], data['email'], data['password'])
+      user.first_name = data['first_name']
+      user.last_name = data['last_name']
+      user.save()
+      userprofile = UserProfile()
+      userprofile.location = data['location']
+      userprofile.age = data['age']
+      userprofile.user = user
+      userprofile.save()
+      r = Recommends()
+      r.user = user
+      r.rec1, r.rec2, r.rec3, r.rec4, r.rec5 = Book.objects.all().extra(order_by=['rating'])[:5]
+      r.save()
       return HttpResponseRedirect("/user/")
   else:
     form = UserForm()
@@ -84,9 +97,17 @@ def view_rating(request, isbn):
 @login_required
 def add_rating(request, isbn, rating):
   user = request.user
-  rating_obj = user.rating_set.get(book__isbn=isbn)
+  if user.get_profile().isBookRated(isbn):
+    rating_obj = user.rating_set.get(book__isbn=isbn)
+  else:
+    rating_obj = Rating()
+    rating_obj.book = Book.objects.get(isbn=isbn)
+    rating_obj.user = user
   rating_obj.rating = rating
   rating_obj.save()
+  userp = user.get_profile()
+  userp.stale=True
+  userp.save()
   return HttpResponseRedirect("/book/"+isbn+"/rating")
   
 

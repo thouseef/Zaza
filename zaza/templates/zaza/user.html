@@ -1,12 +1,13 @@
 <p> Welcome  <b>{{ username }}</b> from <b>{{ user.location }}</b></p>
 <p><b>Your recommendations are</b><br/>
 {% for reco in recos %}
- 	<img src="{{ reco.imgs }}"> {{ reco.title }} <br/>
+ 	<a href='/book/{{reco.isbn}}'><img src="{{ reco.imgs }}"> {{ reco.title }}</a> <br/>
 {% endfor %}
 </p>
 <p><b>Your ratings are</b><br/>
 {% for rating in ratings %}
-  {{ rating.book.title }} : {{ rating.rating }} <br/>
+  <a href='/book/{{ rating.book.isbn }}'>
+   {{ rating.book.title }}</a> : {{ rating.rating }} <br/>
 {% endfor %}
 </p>
 <a href = '{% url django.contrib.auth.views.logout %}'>Logout</a>
