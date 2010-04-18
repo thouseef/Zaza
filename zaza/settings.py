@@ -44,7 +44,7 @@ MEDIA_URL = ''
 LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout/'
 AUTH_PROFILE_MODULE = 'ui.UserProfile'
-STATIC_DOC_ROOT = '/Users/aslam/Movies/thsf/Zaza/zaza/media/'
+STATIC_DOC_ROOT = '/Users/thouseefhameed/Development/Main Project/thsf_project/zaza/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -69,7 +69,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'zaza.urls'
 
-TEMPLATE_DIRS = ('/Users/aslam/Movies/thsf/Zaza/zaza/templates/'
+TEMPLATE_DIRS = ('/Users/thouseefhameed/Development/Main Project/thsf_project/zaza/templates/'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

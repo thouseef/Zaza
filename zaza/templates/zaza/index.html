@@ -1,3 +1,142 @@
- <p> Welcome to Zaza </p>
- <a href = '{% url zaza.ui.views.user_reg %}'> New User </a><br/>
- <a href = '{% url zaza.ui.views.user %}'> Login </a>
+{% extends "zaza/base.html" %}
+{% block extrahead %}
+  <script type="text/javascript" src="/static/js/jquery-1.4.2.js"></script>
+  <script type="text/javascript" >
+    $(document).ready(function(){
+    $("input#New").click(function(){
+      $("div#right_section").load("/register");
+    });
+      
+    });
+  </script>
+
+{% endblock %}
+
+
+{% block leftcontent %}
+<div class="left_box_border">
+  <div class="left_box">
+    <span style="color:#7B0E10; font-weight:bold; font-size:14px; padding:10px;">USERS LOG IN</span>
+    <img src="/static/images/user-icon.png" width="37" height="27" alt="user" title="user"/>
+   
+    <div id="login">
+      {% if error_message %}
+      <p class="errornote">{{ error_message }}</p>
+      {% endif %}
+      <div id="login">
+	<form action="/accounts/login/" method="post" id="login-form">
+	  <label for="id_username">Username:</label> <input type="text" name="username" id="id_username" class="input" />
+	  <div class="clear"></div>
+	  <label for="id_password">Password:</label> <input type="password" name="password" id="id_password" class="input" />
+	  <input type="hidden" name="this_is_the_login_form" value="1" />
+	  <div class="clear"></div>
+	  <label>&nbsp;</label><input type="submit" class="submit" value="Log in" />
+	  <input type="button" name="new_user" value="New User" class="new_user" id="New" />
+	    <div class="clear"></div>
+	</form>
+
+	<script type="text/javascript">
+	  document.getElementById('id_username').focus()
+	</script>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<div class="left_box_border">
+  <div class="left_box">
+    <img src="/static/images/pic1.png" width="53" height="62" alt="pic" title="pic" class="pic"/>
+    <div class="title"><a href="#">GROWING IDDEAS</a></div>
+    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>	
+  </div> 
+</div>
+
+<div class="left_box_border">
+  <div class="left_box">
+    <img src="/static/images/pic2.png" width="53" height="62" alt="pic" title="pic" class="pic"/>
+    <div class="title"><a href="#">LIVE SUPPORT</a></div>
+    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>	
+  </div> 
+</div>
+
+<div class="left_box_border">
+  <div class="left_box">
+    <img src="/static/images/pic3.png" width="53" height="62" alt="pic" title="pic" class="pic"/>
+    <div class="title"><a href="#">INTERNET PROTECTION</a></div>
+    <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>	
+  </div> 
+</div>
+{% endblock %}
+
+            
+
+{% block rightcontent %}            	
+<div class="right_box">
+  <div class="title"> WELCOME  TO Zaza Rec Sys</div>
+  <div class="content">Zaza Rec Sys is intented to be an implementation of Collaborative Filtering System which is one of the widely used strategy having applications in a diverse range of domains. Almost all applications in internet is using some sort of recommendation algorithm to provide the users with a wide range of suggestions.	</div>
+</div>
+
+<div class="right_box">
+  <img src="/static/images/pic3.jpg" width="240" height="95" class="pic_border" alt="pic3" title="pic3"  />
+  <div class="title_small"> MOVE FORWARD WITH US</div>
+  <div class="content">
+    <p>Come and experience a new way of finding interesting stuff and share it between your friends and family. Discover newer items suggested to you. Have fun in reading.</p>
+  </div>
+</div>
+
+<div class="right_box">
+  <div id="right_box_1">
+    <div class="title"> SERVICES</div>
+    
+    <ul class="services">
+      <li><a href="#" class="nav_services">Sed ut perspiciatis unde omnis iste</a></li>
+      <li><a href="#" class="nav_services">Neque porro quisquam est, qui dolorem </a></li>
+      <li><a href="#" class="nav_services">Sed ut perspiciatis unde omnis iste</a></li>
+      <li><a href="#" class="nav_services">Sed ut perspiciatis unde omnis iste</a></li>
+      <li><a href="#" class="nav_services">Neque porro quisquam est, qui dolorem </a></li>
+      <li><a href="#" class="nav_services">Velit esse quam nihil molestiae consequatur</a></li>
+      <li><a href="#" class="nav_services">Neque porro quisquam est, qui dolorem </a></li>
+      <li><a href="#" class="nav_services">Velit esse quam nihil molestiae consequatur</a></li>
+      <li><a href="#" class="nav_services">Neque porro quisquam est, qui dolorem </a></li>
+      <li><a href="#" class="nav_services">Velit esse quam nihil molestiae consequatur</a></li>
+      <li><a href="#" class="nav_services">Neque porro quisquam est, qui dolorem </a></li>
+    </ul>
+    
+  </div>
+  <div id="right_box_2">
+    <div class="title">POPULAR BOOKS</div>
+    <div class="news_box">
+      <img src="/static/images/pic5.jpg" width="110" height="83"  alt="pic5" title="pic5" class="pic_news"  />
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </div>
+    <div class="news_submenu">
+      <div class="news_link"><img src="/static/images/read_more.gif" width="13" height="13"  alt="read more" title="read more"/>
+        <a href="#">read more</a>
+      </div>
+      <div class="news_link"><img src="/static/images/print.gif" width="13" height="13"  alt="print" title="print"/>
+        <a href="#">print</a>
+      </div>
+      <div class="news_link"><img src="/static/images/comments.gif" width="13" height="13" alt="comments" title="comments" />
+        <a href="#">comments</a>
+      </div>
+    </div>
+    
+    <div class="news_box">
+      <img src="/static/images/pic4.jpg" width="110" height="74"  alt="pic5" title="pic5" class="pic_news"  />
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </div>
+    <div class="news_submenu">
+      <div class="news_link"><img src="/static/images/read_more.gif" width="13" height="13"  alt="read more" title="read more"/>
+        <a href="#">read more</a>
+      </div>
+      <div class="news_link"><img src="/static/images/print.gif" width="13" height="13"  alt="print" title="print"/>
+        <a href="#">print</a>
+      </div>
+      <div class="news_link"><img src="/static/images/comments.gif" width="13" height="13"  alt="comments" title="comments"/>
+        <a href="#">comments</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

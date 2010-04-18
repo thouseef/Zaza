@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+<title>Zaza Rec Sys</title>
+{% block extrahead %}{% endblock %}
+</head>
+<body>
+
+<div id="main_content">
+		<div id="top_banner">
+       	<div>
+                    <ul class="menu">
+                        <li><a href="#" class="nav">home</a></li>
+                        <li><a href="#" class="nav">about us</a></li>
+                        <li><a href="#" class="nav">services</a></li>
+                    </ul>
+                </div>	
+        </div>
+        
+       
+                <div id="page_content">
+        	<div id="left_section">
+		  {% block leftcontent %}{% endblock %}
+		</div>
+            
+            <div id="right_section">
+            	{% block rightcontent %}{% endblock %}
+            </div>
+<div id="footer">
+<div id="copyrights">
+Zaza Rec Sys.&copy; All Rights Reserved 2010
+</div>
+	<div>
+                    <ul class="footer_menu">
+                        <li><a href="#" class="nav2">home </a></li>
+                        <li><a href="#" class="nav2">services</a></li>
+                        <li><a href="#" class="nav2">partners</a></li>
+                        <li><a href="#" class="nav2">contact</a></li>
+                    </ul>
+    </div>
+<div id="madeby">
+<a href="http://127.0.0.1:8000"><img src="/static/images/thsf.jpg" width="200" height="35"  border="0" alt="Thsf" title="Thsf"/></a><br />
+</div>
+</div>
+
+
+
+</div>
+
+</body>
+</html>
