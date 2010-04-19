@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
 from django.shortcuts import render_to_response
@@ -175,3 +176,18 @@ def edit_comment(request, isbn, id):
 
 def results_search():
   pass
+
+def search(request):
+  context = {}
+  if request.user.is_authenticated():
+    user = request.user.get_profile()
+    context = {'user':user,'username':request.user,'logged_in':True}
+  else:
+    context = {'logged_in':False}
+  if request.method == 'GET':
+    query = request.GET['query']
+    context["query"] = query
+    books = Book.objects.filter(Q(title__contains=query) | Q(author__contains=query)).distinct()
+    context['books'] = books
+  return render_to_response("zaza/search.html", context)
+
