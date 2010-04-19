@@ -23,6 +23,7 @@
       {% endfor %}
   </div>
 </div>
+<a name="rating" />
 <div class="right_box">
   <div class="title">Books You Rated</div>
   <div class="content">
@@ -45,9 +46,9 @@
       {% endfor %}
   </div>
   <b>
-  {% if prev %}<a href="{% url zaza.ui.views.user %}?page={{ppage}}">Prev</a>{% endif %}
+  {% if prev %}<a href="{% url zaza.ui.views.user %}?page={{ppage}}#rating">Prev</a>{% endif %}
   {{ npage }} of {{ pages }}
-  {% if next %}<a href="{% url zaza.ui.views.user %}?page={{npage}}">Next</a>{% endif %}
+  {% if next %}<a href="{% url zaza.ui.views.user %}?page={{npage}}#rating">Next</a>{% endif %}
   </b>
 </div>
 {% endblock %}

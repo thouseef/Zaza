@@ -5,11 +5,15 @@
 {% endblock %}
 
 {% block left_extras %}
-<div class="left_box_border">
-  <div class="left_box">
-    <div class="title"><a href="#">Books Rated</a></div>
-  </div> 
-</div>
+  <div> <b><font size="+1">Users who have rated :</font></b>
+  {% for rat in ratings %}
+    <div class="title">{{ rat.user.username }} : {{ rat.rating }}</div>
+  {% endfor %}
+  <b>
+  {% if prev %}<a href="/book/{{book.isbn}}?page={{ppage}}">Prev</a>{% endif %}
+  {{ npage }} of {{ pages }}
+  {% if next %}<a href="/book/{{book.isbn}}?page={{npage}}">Next</a>{% endif %}
+  </b>
 {% endblock %}
 
 {% block rightcontent %}

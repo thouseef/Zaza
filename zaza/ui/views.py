@@ -139,6 +139,10 @@ def book_rated(request):
 @login_required
 def book_view(request, isbn):
   context = {}
+  if "page" in request.GET:
+    page = int(request.GET["page"])
+  else:
+    page = 0
   user = request.user.get_profile()
   book = Book.objects.get(isbn = isbn)
   context['logged_in'] = True
@@ -146,6 +150,15 @@ def book_view(request, isbn):
   context['user'] = user
   context['book'] = book
   context['comments'] = book.comments_set.order_by('date')
+  ratings = book.rating_set.order_by('rating').reverse()
+  if ((len(ratings)-1) / 5) > page:
+    context['next'] = True
+    context['npage'] = page+1
+  if page > 0:
+    context['prev'] = True
+    context['ppage'] = page-1
+  context['pages'] = (len(ratings) / 5) + 1
+  context['ratings'] = ratings[5*page:5*(page+1)]
   return render_to_response("zaza/book.html",context)
 
 def view_rating(request, isbn):
