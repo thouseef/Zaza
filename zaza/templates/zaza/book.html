@@ -1,63 +1,42 @@
 {% extends "zaza/base.html" %}
 {% block extrahead %}
-  <script type="text/javascript" src="/static/js/jquery-1.4.2.js"></script>
-  <script type="text/javascript" src="/static/js/scripts.js"></script>
+<script type="text/javascript" src="/static/js/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="/static/js/scripts.js"></script>
 {% endblock %}
 
-  {% block leftcontent %}
-  <div class="left_box_border">
-    <div class="left_box">
-      <span style="color:#7B0E10; font-weight:bold; font-size:14px; padding:10px;">{{ username }}</span>
-      <img src="/static/images/user-icon.png" width="37" height="27" alt="user" title="user"/>
-      <div id="login">
-	<div id="login">
-	  <p id="login-form">{{ user.location }}</p>
-	</div>
-	<a href = '{% url django.contrib.auth.views.logout %}'>Logout</a>
-      </div>
-    </div> 
+{% block rightcontent %}
+<div class="right_box">
+  <div > <img src="{{ book.imgm }}" suppress="false" alternate="Image"class="pic"/></div> 
+  <div class="title">{{ book.title }}</div>
+  <div class="content">
+    <span style="color:#7B0E10; padding:0px;">Isbn No: {{book.isbn }} </span>
+    <span style="color:#7B0E10; padding:10px;">Author: {{book.author}} </span>
   </div>
-  {% endblock %}
-
-  {% block rightcontent %}
+  <div id="rating" class="rateMe" title="Rate Me...">Rating: {{ rating }}</div>
+  <div class="clear"></div>    
+</div>
+<div class="right_box">
+  <div class="title" style="padding:10px;" >Comments by users:</div>
   <div class="right_box">
-    <img src="{{ book.imgs }}"class="pic"/>
-    <div class="title">{{ book.title }}</div>
-    <div class="content">
-      <span style="color:#7B0E10; padding:0px;">Isbn No: {{book.isbn }} </span>
-      <span style="color:#7B0E10; padding:10px;">Author: {{book.author}} </span>
+    {% for comment in comments %}
+    <div id='{{comment.id}}'class="content">
+      <span style="padding-left:5px;"class="title">{{ comment.user }}</span>
+      <span style="padding-left:1px;" class="title">: {{ comment.title }} </span>
+      <div class="content">
+	{{ comment.body }}
+	<div class="clear"></div>
+	{{ comment.date|date }}
+	<span style="padding-left:10px;">
+	  <button type="button" class="delete">delete</button>
+	</span>
+      </div>
     </div>
-    <div id="rating" class="rateMe" title="Rate Me...">Rating: {{ rating }}</div>
-    <div class="clear"></div>    
+    {% endfor %}
   </div>
   <div class="right_box">
-    <div class="title" style="padding:10px;" >Comments by users:</div>
-    <div class="right_box">
-      {% for comment in comments %}
-      <div id='{{comment.id}}'class="content">
-	<span style="padding-left:5px;"class="title">{{ comment.user }}</span>
-	<span style="padding-left:1px;" class="title">: {{ comment.title }} </span>
-	<div class="content">
-	  {{ comment.body }}
-	  <div class="clear"></div>
-	  {{ comment.date|date }}
-	  <span style="padding-left:10px;">
-	    <button type="button" class="delete">delete</button>
-	  </span>
-	</div>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="right_box"
-	 <div class="title">Add a comment: </div>
-	 <div id="commentForm" class="content"style="padding-left:30px;padding-right:150px;"></div>
-	 
+       <div class="title">Add a comment: </div>
+       <div id="commentForm" class="content"style="padding-left:30px;padding-right:150px;"></div>
   </div>
 </div>
- 
-</p>
-
-</p>
-
 {% endblock %}
 

@@ -5,14 +5,28 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from zaza.ui.models import *
+from django.contrib import auth
 
 import datetime
 
 
 
 def index(request):
-  return render_to_response('zaza/index.html')
+  context = {}
+  if request.user.is_authenticated():
+    user = request.user.get_profile()
+    context = {'user':user,'username':request.user,'logged_in':True}
+  else:
+    context = {'logged_in':False}
+  return render_to_response('zaza/index.html',context)
 
+def logout(request):
+  if request.user.is_authenticated():
+    context = {'user':request.user}
+    auth.logout(request)
+    return render_to_response('zaza/logout.html',context)
+  else:
+    return HttpResponseRedirect('/')
 
 @login_required
 def user(request):
@@ -21,6 +35,7 @@ def user(request):
   #username = request.user
   #user = User.objects.get(username__exact=username)
   user = request.user
+  context['logged_in'] = True
   context['username'] = user
   context['user'] = user.get_profile()
   context['ratings'] = user.rating_set.order_by('rating').reverse()
@@ -38,7 +53,7 @@ def user(request):
 
 def user_reg(request):
   if request.method == 'POST':
-    xhr = request.get.has_key('xhr')
+    xhr = request.GET.has_key('xhr')
     response = {}
     form = UserForm(request.POST)
     if form.is_valid():
@@ -88,6 +103,7 @@ def book_view(request, isbn):
   context = {}
   user = request.user.get_profile()
   book = Book.objects.get(isbn = isbn)
+  context['logged_in'] = True
   context['username'] = request.user
   context['user'] = user
   context['book'] = book

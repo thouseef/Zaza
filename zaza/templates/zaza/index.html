@@ -12,36 +12,7 @@
 {% endblock %}
 
 
-{% block leftcontent %}
-<div class="left_box_border">
-  <div class="left_box">
-    {% block login %}
-    <span style="color:#7B0E10; font-weight:bold; font-size:14px; padding:10px;">USERS LOG IN</span>
-    <img src="/static/images/user-icon.png" width="37" height="27" alt="user" title="user"/>
-    <div id="login">
-      {% if error_message %}
-      <p class="errornote">{{ error_message }}</p>
-      {% endif %}
-      <div id="login">
-	<form action="/accounts/login/" method="post" id="login-form">
-	  <label for="id_username">Username:</label> <input type="text" name="username" id="id_username" class="input" />
-	  <div class="clear"></div>
-	  <label for="id_password">Password:</label> <input type="password" name="password" id="id_password" class="input" />
-	  <input type="hidden" name="this_is_the_login_form" value="1" />
-	  <div class="clear"></div>
-	  <label>&nbsp;</label><input type="submit" class="submit" value="Log in" />
-	  <input type="button" name="new_user" value="New User" class="new_user" id="New" />
-	  <div class="clear"></div>
-	</form>
-	
-	<script type="text/javascript">
-	  document.getElementById('id_username').focus()
-	</script>
-      </div>
-      {% endblock %}
-    </div>
-  </div> 
-</div>
+{% block aaleftcontent %}
 
 <div class="left_box_border">
   <div class="left_box">

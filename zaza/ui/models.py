@@ -109,6 +109,7 @@ class UserProfile(models.Model):
     
 
 class UserForm(ModelForm):
+  username = CharField(max_length=16)
   password = CharField(max_length=16)
   location = CharField(max_length=128)
   age = IntegerField()
@@ -164,6 +165,7 @@ class Comments(models.Model):
     return self.book.title
 
 class CommentsForm(ModelForm):
+  title = CharField(max_length=100)
   body = CharField(widget=Textarea)
   class Meta:
     model = Comments
