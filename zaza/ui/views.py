@@ -34,13 +34,25 @@ def logout(request):
 def user(request):
   context = {}
   recos = []
+  if "page" in request.GET:
+    page = int(request.GET["page"])
+  else:
+    page = 0
   #username = request.user
   #user = User.objects.get(username__exact=username)
   user = request.user
   context['logged_in'] = True
   context['username'] = user
   context['user'] = user.get_profile()
-  context['ratings'] = user.rating_set.order_by('rating').reverse()
+  ratings = user.rating_set.order_by('rating').reverse()
+  if ((len(ratings)-1) / 5) > page:
+    context['next'] = True
+    context['npage'] = page+1
+  if page > 0:
+    context['prev'] = True
+    context['ppage'] = page-1
+  context['pages'] = (len(ratings) / 5) + 1
+  context['ratings'] = ratings[5*page:5*(page+1)]
   recos = user.recommends_set.all()
   context['recos'] = []
   if len(recos) >= 1:
