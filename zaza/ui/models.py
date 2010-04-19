@@ -44,14 +44,15 @@ class UserProfile(models.Model):
     for i in range(50):
       threshold = i
       users = getSimilarUsers_(books, threshold)
-      if users.count() < 20:
+      if users.count() < 10:
         break
-    print "Number of similar users is %s with threshold %s" % (users.count(), threshold)
+    if users.count() == 0:
+      threshold -= 1
+      users = getSimilarUsers_(books, threshold)
     for user in users:
       num = den1 = den2 = 0
-      print "user is %s" % user.username
       for book in Book.objects.select_related('rating').filter(rating__user__username = self.user.username,
-                                      rating__user__username = user.username):
+                                                               rating__user__username = user.username):
         if not self.isBookRated(book.isbn) or not user.get_profile().isBookRated(book.isbn):
           continue
         rating1 = self.getBookRating(book.isbn)
@@ -61,7 +62,7 @@ class UserProfile(models.Model):
         num += tmp1 * tmp2
         den1 += tmp1 * tmp1
         den2 += tmp2 * tmp2
-      if den1 == 0.0 or den2 == 0.0:
+      if num == 0.0 or den1 == 0.0 or den2 == 0.0:
         continue
       sim_users[user] = num / math.sqrt(den1*den2)
     return sim_users
@@ -81,12 +82,9 @@ class UserProfile(models.Model):
         if user2 == self.user or not user2.get_profile().isBookRated(book):
           continue
         bookScores[book] += weight * (user2.get_profile().getBookRating(book) - user2.get_profile().getMeanRating())
-      if book == '0971880107':
-          print "book 0971880107 %s %s" %(weight, bookScores[book])
-    return sorted(bookScores, key = operator.itemgetter(1), reverse=True)[:5]
+    return sorted(bookScores.iteritems(), key = operator.itemgetter(1), reverse=True)[:5]
 
   def storeRecommendations(self):
-    print "Generating recommendations for user %s" % self.user.username
     books = self.getRecommendations()
     recommends = Recommends.objects.filter(user__username=self.user.username)
     if len(recommends) < 1:
@@ -95,15 +93,15 @@ class UserProfile(models.Model):
       recommends = recommends[0]
     recommends.user = self.user
     if len(books) >= 1:
-      recommends.rec1 = Book.objects.get(isbn__exact=books[0])
+      recommends.rec1 = Book.objects.get(isbn__exact=books[0][0])
     if len(books) >= 2:
-      recommends.rec2 = Book.objects.get(isbn__exact=books[1])
+      recommends.rec2 = Book.objects.get(isbn__exact=books[1][0])
     if len(books) >= 3:
-      recommends.rec3 = Book.objects.get(isbn__exact=books[2])
+      recommends.rec3 = Book.objects.get(isbn__exact=books[2][0])
     if len(books) >= 4:
-      recommends.rec4 = Book.objects.get(isbn__exact=books[3])
+      recommends.rec4 = Book.objects.get(isbn__exact=books[3][0])
     if len(books) >= 5:
-      recommends.rec5 = Book.objects.get(isbn__exact=books[4])
+      recommends.rec5 = Book.objects.get(isbn__exact=books[4][0])
     recommends.save()
     return recommends
     

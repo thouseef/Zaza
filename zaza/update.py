@@ -9,7 +9,12 @@ while True:
   for userp in users:
     print "Updating recommendations for %s" % userp.user.username
     r =  userp.storeRecommendations()
-    print "New recommendations are %s,%s,%s,%s,%s" % (r.rec1.isbn, r.rec2.isbn, r.rec3.isbn, r.rec4.isbn, r.rec5.isbn)
+    print "New recommendations are :"
+    print " %s:%s" % (r.rec1.isbn, r.rec1.title)
+    print " %s:%s" % (r.rec2.isbn, r.rec2.title)
+    print " %s:%s" % (r.rec3.isbn, r.rec3.title)
+    print " %s:%s" % (r.rec4.isbn, r.rec4.title)
+    print " %s:%s" % (r.rec5.isbn, r.rec5.title)
     userp.stale = False
     userp.save()
-  time.sleep(10)
+  time.sleep(1)
