@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block left_extras %}
-  <div> <b><font size="+1">Users who have rated :</font></b>
+  <div><p><b><font size="+1">Users who have rated :</font></b></p>
   {% for rat in ratings %}
-    <div class="title">{{ rat.user.username }} : {{ rat.rating }}</div>
+    <div class="title"><a href="/accounts/{{rat.user.username}}">{{ rat.user.username }} : {{ rat.rating }}</a></div>
   {% endfor %}
+  <p>
   <b>
   {% if prev %}<a href="/book/{{book.isbn}}?page={{ppage}}">Prev</a>{% endif %}
   {{ npage }} of {{ pages }}
   {% if next %}<a href="/book/{{book.isbn}}?page={{npage}}">Next</a>{% endif %}
   </b>
+	</p>
 {% endblock %}
 
 {% block rightcontent %}
