@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+
 <title>Zaza Rec Sys</title>
 {% block extrahead %}{% endblock %}
 </head>
@@ -33,10 +34,21 @@
 	    {% endif %}
 	    <div id="login">
 	      <form action="/accounts/login/" method="post" id="login-form">
-		<label for="id_username">Username:</label> <input type="text" name="username" id="id_username" class="input" />
-		<div class="clear"></div>
-		<label for="id_password">Password:</label> <input type="password" name="password" id="id_password" class="input" />
-		<input type="hidden" name="this_is_the_login_form" value="1" />
+		<table>
+		  <tr><th>
+		      <label for="id_username">Username:</label>
+		    </th><td>
+		      <input type="text" name="username" id="id_username" class="input" /></td></tr>
+		  <div class="clear"></div>
+		  <tr><th>
+		      <label for="id_password">Password:</label>
+		    </th><td>
+		      <input type="password" name="password" id="id_password" class="input" /></td></tr>
+		  <input type="hidden" name="this_is_the_login_form" value="1" />
+		  <div class="clear"></div>
+		</table>
+		
+		
 		<div class="clear"></div>
 		<label>&nbsp;</label><input type="submit" class="submit" value="Log in" />
 		<input type="button" name="new_user" value="New User" class="new_user" id="New" />
@@ -57,6 +69,7 @@
 		<div id="login">
 		  <p id="login-form">{{ user.location }}</p>
 		</div>
+		<input type="button" name="logout" value="Logout" class="logout" id="logout" onclick=window.location="/accounts/logout" />
 		<a href = '{% url zaza.ui.views.logout %}'>Logout</a>
 	      </div>
 	    </div> 
@@ -66,7 +79,7 @@
 	</div>
       </div>
 
-    <div id="right_section">
+      <div id="right_section">
       {% block rightcontent %}{% endblock %}
     </div>
 
