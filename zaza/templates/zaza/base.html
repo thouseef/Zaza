@@ -68,12 +68,13 @@
 	      <img src="/static/images/user-icon.png" width="37" height="27" alt="user" title="user"/>
 	      <div id="login">
 		<div id="login">
-		  <p id="login-form">{{ user.location }}</p>
+      <p> Welcome <b> {{ user.user.first_name }} {{ user.user.last_name }}</b></p>
+		  <p id="login-form"> from <b>{{ user.location }}</b></p>
 		</div>
 		<div style="padding-bottom:5px;">
-		  <input type="button" name="update" value="Update Profile" id="update" onclick=window.loacation="/accounts/profile/update/"/>
+			<a href='/accounts/profile/update/'>Update Profile</a>&nbsp;&nbsp;s
+		<a href='/accounts/logout'>Logout</a>
 		</div>
-		<input type="button" name="logout" value="Logout" class="logout" id="logout" onclick=window.location="/accounts/logout"  />
 	      </div>
 	    </div> 
 	    {% endif %}
