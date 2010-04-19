@@ -29,7 +29,12 @@ class UserProfile(models.Model):
     return self.user.rating_set.get(book__isbn = book).rating
 
   def getMeanRating(self):
-    return self.user.rating_set.all().aggregate(Avg('rating')).get('rating__avg', 0.0)
+    avg = self.user.rating_set.all().aggregate(Avg('rating')).get('rating__avg', 0.0)
+    if avg > 5:
+      return avg - 0.5
+    else:
+      return avg + 0.5
+    
 
   def getSimilarUsers(self):
     def getSimilarUsers_(books, threshold):
