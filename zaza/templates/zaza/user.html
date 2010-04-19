@@ -17,7 +17,7 @@
     </div>
       <div class="content">
 	<span style="color:#7B0E10; padding:0px;">Isbn No: {{ reco.isbn }} </span>
-	<span style="color:#7B0E10; padding:10px;">Author: {{ reco.author }} </span>
+	<span style="color:#7B0E10; padding:10px;">Author: <a href="/search?query={{ reco.author }}">{{ reco.author }}</a> </span>
       </div>
       <div class="clear"></div>    
       {% endfor %}
@@ -34,7 +34,7 @@
     </div>
       <div class="content">
 	<span style="color:#7B0E10; padding:0px;">Isbn No: {{ rat.book.isbn }} </span>
-	<span style="color:#7B0E10; padding:10px;">Author: {{ rat.book.author }} </span><br />
+	<span style="color:#7B0E10; padding:10px;">Author: <a href="/search?query={{ rat.book.author }}">{{rat.book.author}}</a> </span><br />
 	<span class="rating">
     Rating : 
     {% load stars %}
