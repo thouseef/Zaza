@@ -95,7 +95,11 @@ def user_reg(request):
       userprofile.save()
       r = Recommends()
       r.user = user
-      r.rec1, r.rec2, r.rec3, r.rec4, r.rec5 = Book.objects.all().extra(order_by=['rating'])[:5]
+      r.rec1 = Book.objects.all().extra(order_by=['rating'])[:20][random.randint(0,19)]
+      r.rec2 = Book.objects.all().extra(order_by=['rating'])[:20][random.randint(0,19)]
+      r.rec3 = Book.objects.all().extra(order_by=['rating'])[:20][random.randint(0,19)]
+      r.rec4 = Book.objects.all().extra(order_by=['rating'])[:20][random.randint(0,19)]
+      r.rec5 = Book.objects.all().extra(order_by=['rating'])[:20][random.randint(0,19)]
       r.save()
       response.update({'success': True})
     else:
@@ -161,6 +165,7 @@ def book_view(request, isbn):
   context['cusername'] = request.user
   context['cuser'] = user
   context['book'] = book
+  context['avgrating'] = "%.1f" % book.getMeanRating()
   context['comments'] = book.comments_set.order_by('date')
   ratings = book.rating_set.order_by('rating').reverse()
   if ((len(ratings)-1) / 5) > page:

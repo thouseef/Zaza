@@ -135,6 +135,9 @@ class Book(models.Model):
   def __unicode__(self):
     return self.title
 
+  def getMeanRating(self):
+    return self.rating_set.all().aggregate(Avg('rating')).get('rating__avg', 0.0)
+
 
 class Rating(models.Model):
   book = models.ForeignKey('Book')
