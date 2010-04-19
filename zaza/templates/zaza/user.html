@@ -8,7 +8,7 @@
 
 {% block rightcontent %}
 <div class="right_box">
-  <div class="title">Recommendations for you:</div>
+  <div class="title">Recommendations for {{user.user.username}}:</div>
   <div class="content">
     {% for reco in recos %}
     <div class="title">
@@ -25,7 +25,7 @@
 </div>
 <a name="rating" />
 <div class="right_box">
-  <div class="title">Books You Rated</div>
+  <div class="title">Books Rated by {{user.user.username}}</div>
   <div class="content">
     {% for rat in ratings %}
     <div class="title">

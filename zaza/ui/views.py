@@ -32,6 +32,14 @@ def logout(request):
 
 @login_required
 def user(request):
+  user = request.user
+  return show_user(request, user, user)
+
+def other_user(request, uname):
+  user = User.objects.filter(username=uname)[0]
+  return show_user(request, request.user, user)
+
+def show_user(request, cuser, user):
   context = {}
   recos = []
   if "page" in request.GET:
@@ -40,9 +48,9 @@ def user(request):
     page = 0
   #username = request.user
   #user = User.objects.get(username__exact=username)
-  user = request.user
   context['logged_in'] = True
-  context['username'] = user
+  context['cusername'] = cuser
+  context['cuser'] = cuser.get_profile()
   context['user'] = user.get_profile()
   ratings = user.rating_set.order_by('rating').reverse()
   if ((len(ratings)-1) / 5) > page:
