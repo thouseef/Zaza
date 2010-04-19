@@ -10,7 +10,10 @@ $(document).ready(function(){
 	alert("clicked");
 	query='/user/books';
 	$("div.right_box").load(query+' .right_box');
-    });      
+    });
+    $("input#New").click(function(){
+	$("div#right_section").load("/register");
+    });
 });
   
 

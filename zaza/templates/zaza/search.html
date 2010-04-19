@@ -20,6 +20,11 @@
       </div>
       <div class="clear"></div>    
       {% endfor %}
+  <b>
+  {% if prev %}<a href="{% url zaza.ui.views.search %}?query={{query}}&page={{ppage}}">Prev</a>{% endif %}
+  {{ npage }} of {{ pages }}
+  {% if next %}<a href="{% url zaza.ui.views.search %}?query={{query}}&page={{npage}}">Next</a>{% endif %}
+  </b>
   </div>
 </div>
 

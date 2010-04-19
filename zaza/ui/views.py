@@ -228,6 +228,10 @@ def results_search():
 
 def search(request):
   context = {}
+  if "page" in request.GET:
+    page = int(request.GET["page"])
+  else:
+    page = 0
   if request.user.is_authenticated():
     user = request.user.get_profile()
     context = {'user':user,'username':request.user,'logged_in':True}
@@ -237,6 +241,16 @@ def search(request):
     query = request.GET['query']
     context["query"] = query
     books = Book.objects.filter(Q(title__contains=query) | Q(author__contains=query)).distinct()
-    context['books'] = books
+    if ((len(books)-1) / 5) > page:
+      context['next'] = True
+      context['npage'] = page+1
+    if page > 0:
+      context['prev'] = True
+      context['ppage'] = page-1
+    context['pages'] = (len(books) / 5) + 1
+    context['books'] = books[5*page:5*(page+1)]
+  else:
+    return render_to_response("zaza/nosearch.html", context)
+
   return render_to_response("zaza/search.html", context)
 
