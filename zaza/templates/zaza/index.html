@@ -6,7 +6,6 @@
     $("input#New").click(function(){
       $("div#right_section").load("/register");
     });
-      
     });
   </script>
 
@@ -16,9 +15,9 @@
 {% block leftcontent %}
 <div class="left_box_border">
   <div class="left_box">
+    {% block login %}
     <span style="color:#7B0E10; font-weight:bold; font-size:14px; padding:10px;">USERS LOG IN</span>
     <img src="/static/images/user-icon.png" width="37" height="27" alt="user" title="user"/>
-   
     <div id="login">
       {% if error_message %}
       <p class="errornote">{{ error_message }}</p>
@@ -32,13 +31,14 @@
 	  <div class="clear"></div>
 	  <label>&nbsp;</label><input type="submit" class="submit" value="Log in" />
 	  <input type="button" name="new_user" value="New User" class="new_user" id="New" />
-	    <div class="clear"></div>
+	  <div class="clear"></div>
 	</form>
-
+	
 	<script type="text/javascript">
 	  document.getElementById('id_username').focus()
 	</script>
       </div>
+      {% endblock %}
     </div>
   </div> 
 </div>

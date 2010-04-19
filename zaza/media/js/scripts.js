@@ -1,12 +1,6 @@
 $(document).ready(function(){
     $("div.rateMe").load("rating/");
-    $("#a").click(function(){
-	$("#commentForm").load("comment/");
-	$("#a").hide();
-    });
-    $(".submit").click(function(){
-	$("#a").show();
-    });
+    $("#commentForm").load("comment/");
     $(".delete").click(function (){
 	alert("clicked delete");
 	id=$(this).parent().attr("id");

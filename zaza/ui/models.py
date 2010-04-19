@@ -1,7 +1,7 @@
 import operator
 import math
 from django.db import models
-from django.forms import ModelForm, CharField, IntegerField
+from django.forms import ModelForm, CharField, IntegerField, Textarea
 from django.contrib.auth.models import User
 from django.forms.models import inlineformset_factory
 from django.db.models import Avg, Count
@@ -164,6 +164,7 @@ class Comments(models.Model):
     return self.book.title
 
 class CommentsForm(ModelForm):
+  body = CharField(widget=Textarea)
   class Meta:
     model = Comments
     fields = ('title','body')

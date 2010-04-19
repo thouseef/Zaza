@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils import simplejson
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -37,6 +38,8 @@ def user(request):
 
 def user_reg(request):
   if request.method == 'POST':
+    xhr = request.get.has_key('xhr')
+    response = {}
     form = UserForm(request.POST)
     if form.is_valid():
       data = form.cleaned_data
@@ -53,6 +56,13 @@ def user_reg(request):
       r.user = user
       r.rec1, r.rec2, r.rec3, r.rec4, r.rec5 = Book.objects.all().extra(order_by=['rating'])[:5]
       r.save()
+      response.update({'success': True})
+    else:
+      response.update({'success': False})
+      response.update({'errors':form.errors})
+    if xhr:
+      return HttpResponse(simplejson.dumps(response), mimetype='application/javascript')      
+    else:
       return HttpResponseRedirect("/user/")
   else:
     form = UserForm()
@@ -96,6 +106,7 @@ def view_rating(request, isbn):
 
 @login_required
 def add_rating(request, isbn, rating):
+  xhr = request.GET.has_key('xhr')
   user = request.user
   if user.get_profile().isBookRated(isbn):
     rating_obj = user.rating_set.get(book__isbn=isbn)
@@ -108,7 +119,10 @@ def add_rating(request, isbn, rating):
   userp = user.get_profile()
   userp.stale=True
   userp.save()
-  return HttpResponseRedirect("/book/"+isbn+"/rating")
+  if xhr:
+    pass
+  else:
+    return HttpResponseRedirect("/book/"+isbn+"/rating")
   
 
 @login_required
