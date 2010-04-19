@@ -64,35 +64,15 @@
   <div id="right_box_2">
     <div class="title">Popular Books</div>
     <div class="news_box">
-      <img src="/static/images/pic5.jpg" width="110" height="83"  alt="pic5" title="pic5" class="pic_news"  />
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-    <div class="news_submenu">
-      <div class="news_link"><img src="/static/images/read_more.gif" width="13" height="13"  alt="read more" title="read more"/>
-        <a href="#">read more</a>
-      </div>
-      <div class="news_link"><img src="/static/images/print.gif" width="13" height="13"  alt="print" title="print"/>
-        <a href="#">print</a>
-      </div>
-      <div class="news_link"><img src="/static/images/comments.gif" width="13" height="13" alt="comments" title="comments" />
-        <a href="#">comments</a>
-      </div>
+		  <a href="/books/{{book1.isbn}}">
+      <img src="{{book1.imgs}}" width="110" height="83"  alt="pic5" title="pic5" class="pic_news"  />
+      {{ book1.title }}</a>
     </div>
     
     <div class="news_box">
-      <img src="/static/images/pic4.jpg" width="110" height="74"  alt="pic5" title="pic5" class="pic_news"  />
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-    <div class="news_submenu">
-      <div class="news_link"><img src="/static/images/read_more.gif" width="13" height="13"  alt="read more" title="read more"/>
-        <a href="#">read more</a>
-      </div>
-      <div class="news_link"><img src="/static/images/print.gif" width="13" height="13"  alt="print" title="print"/>
-        <a href="#">print</a>
-      </div>
-      <div class="news_link"><img src="/static/images/comments.gif" width="13" height="13"  alt="comments" title="comments"/>
-        <a href="#">comments</a>
-      </div>
+		  <a href="/books/{{book1.isbn}}">
+      <img src="{{book2.imgs}}" width="110" height="74"  alt="pic5" title="pic5" class="pic_news"  />
+      {{ book2.title }}</a>
     </div>
   </div>
 </div>

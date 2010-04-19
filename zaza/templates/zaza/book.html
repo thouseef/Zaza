@@ -5,17 +5,6 @@
 {% endblock %}
 
 {% block left_extras %}
-  <div><p><b><font size="+1">Users who have rated :</font></b></p>
-  {% for rat in ratings %}
-    <div class="title"><a href="/accounts/{{rat.user.username}}">{{ rat.user.username }} : {{ rat.rating }}</a></div>
-  {% endfor %}
-  <p>
-  <b>
-  {% if prev %}<a href="/book/{{book.isbn}}?page={{ppage}}">Prev</a>{% endif %}
-  {{ npage }} of {{ pages }}
-  {% if next %}<a href="/book/{{book.isbn}}?page={{npage}}">Next</a>{% endif %}
-  </b>
-	</p>
 {% endblock %}
 
 {% block rightcontent %}
@@ -28,6 +17,19 @@
   </div>
   <div id="rating" class="rateMe" title="Rate Me...">Rating: {{ rating }}</div>
   <div class="clear"></div>    
+</div>
+<div class="right_box">
+  <div><p><b><font size="+1">Users who have rated this book :</font></b></p></div>
+  {% for rat in ratings %}
+    <div class="title"><a href="/accounts/{{rat.user.username}}">{{ rat.user.username }} : {{ rat.rating }}</a></div>
+  {% endfor %}
+  <p>
+  <b>
+  {% if prev %}<a href="/book/{{book.isbn}}?page={{ppage}}">Prev</a>{% endif %}
+  {{ npage }} of {{ pages }}
+  {% if next %}<a href="/book/{{book.isbn}}?page={{npage}}">Next</a>{% endif %}
+  </b>
+	</p>
 </div>
 <div class="right_box">
   <div class="title" style="padding:10px;" >Comments by users:</div>

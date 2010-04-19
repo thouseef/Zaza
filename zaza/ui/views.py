@@ -10,6 +10,7 @@ from django.contrib import auth
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 import datetime
+import random
 
 
 
@@ -17,14 +18,17 @@ def index(request):
   context = {}
   if request.user.is_authenticated():
     user = request.user.get_profile()
-    context = {'user':user,'username':request.user,'logged_in':True}
+    context = {'cuser':user,'cusername':request.user,'logged_in':True}
   else:
     context = {'logged_in':False}
+  ratings = Rating.objects.all().order_by('rating')[:20]
+  context['book1'] = ratings[random.randint(0,19)].book
+  context['book2'] = ratings[random.randint(0,19)].book
   return render_to_response('zaza/index.html',context)
 
 def logout(request):
   if request.user.is_authenticated():
-    context = {'user':request.user}
+    context = {'cuser':request.user}
     auth.logout(request)
     return render_to_response('zaza/logout.html',context)
   else:
@@ -125,8 +129,8 @@ def book_rated(request):
   context = {}
   user = request.user
   context['logged_in'] = True
-  context['username'] = user
-  context['user'] = user.get_profile()
+  context['cusername'] = user
+  context['cuser'] = user.get_profile()
   ratings_list = user.rating_set.order_by('rating').reverse()
   paginator = Paginator(ratings_list,10)
 
@@ -154,8 +158,8 @@ def book_view(request, isbn):
   user = request.user.get_profile()
   book = Book.objects.get(isbn = isbn)
   context['logged_in'] = True
-  context['username'] = request.user
-  context['user'] = user
+  context['cusername'] = request.user
+  context['cuser'] = user
   context['book'] = book
   context['comments'] = book.comments_set.order_by('date')
   ratings = book.rating_set.order_by('rating').reverse()
