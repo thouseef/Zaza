@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from zaza.ui.models import *
 from django.contrib import auth
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 import datetime
 
@@ -99,6 +100,29 @@ def book_add():
 def book_browse():
   pass
 
+def book_rated(request):
+  context = {}
+  user = request.user
+  context['logged_in'] = True
+  context['username'] = user
+  context['user'] = user.get_profile()
+  ratings_list = user.rating_set.order_by('rating').reverse()
+  paginator = Paginator(ratings_list,10)
+
+  try:
+    page = int(request.GET.get('page','1'))
+  except ValueError:
+    page = 1
+
+  try:
+    ratings = paginator.page(page)
+  except (EmptyPage, InvalidPage):
+    ratings = paginator.page(paginator.num_pages)
+
+  context['rating'] = ratings
+  return render_to_response('zaza/view_rated.html',context)
+
+    
 @login_required
 def book_view(request, isbn):
   context = {}

@@ -2,12 +2,15 @@ $(document).ready(function(){
     $("div.rateMe").load("rating/");
     $("#commentForm").load("comment/");
     $(".delete").click(function (){
-	alert("clicked delete");
 	id=$(this).parent().attr("id");
 	query='comment/'+id+"?action=delete";
 	$("#"+id).load(query);
     });
-      
+    $("div#rated_books").click(function (){
+	alert("clicked");
+	query='/user/books';
+	$("div.right_box").load(query+' .right_box');
+    });      
 });
   
 

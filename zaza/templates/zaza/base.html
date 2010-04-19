@@ -47,8 +47,6 @@
 		  <input type="hidden" name="this_is_the_login_form" value="1" />
 		  <div class="clear"></div>
 		</table>
-		
-		
 		<div class="clear"></div>
 		<label>&nbsp;</label><input type="submit" class="submit" value="Log in" />
 		<input type="button" name="new_user" value="New User" class="new_user" id="New" />
@@ -78,27 +76,30 @@
 	    {% endif %}
 	  </div> 
 	  {% endblock %}
+	  {% block left_extras %}
+	  {% endblock %}
 	</div>
       </div>
 
       <div id="right_section">
-      {% block rightcontent %}{% endblock %}
-    </div>
-
-  <div id="footer">
-    <div id="copyrights">
-      Zaza Rec Sys.&copy; All Rights Reserved 2010
+	{% block rightcontent %}{% endblock %}
       </div>
-    <div>
-      <ul class="footer_menu">
-        <li><a href="/" class="nav2">home </a></li>
-        <li><a href="#" class="nav2">services</a></li>
-          <li><a href="#" class="nav2">contact</a></li>
+      
+      <div id="footer">
+	<div id="copyrights">
+	  Zaza Rec Sys.&copy; All Rights Reserved 2010
+      </div>
+	<div>
+	  <ul class="footer_menu">
+            <li><a href="/" class="nav2">home </a></li>
+            <li><a href="#" class="nav2">services</a></li>
+            <li><a href="#" class="nav2">contact</a></li>
       </ul>
-    </div>
-    <div id="madeby">
-      <a href="http://127.0.0.1:8000"><img src="/static/images/thsf.jpg" width="200" height="35"  border="0" alt="Thsf" title="Thsf"/></a><br />
-    </div>
-  </div>
-</body>
-</html>
+	</div>
+	<div id="madeby">
+	  <a href="http://127.0.0.1:8000"><img src="/static/images/thsf.jpg" width="200" height="35"  border="0" alt="Thsf" title="Thsf"/></a><br />
+	</div>
+      </div>
+    </body>
+  </html>
+  

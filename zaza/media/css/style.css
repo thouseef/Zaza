@@ -234,6 +234,13 @@ a.nav_services:hover {
 display:block; padding:1px 0 0 14px; margin:2px;width:auto; height:auto; text-align:left; line-height:17px;
 text-decoration:none; background:url(/static/images/bullet_a.png) no-repeat left; color:#000000;}
 /*-------footer-----*/
+.wrapper{
+min-height:100%;
+margin:0 auto -70px; 
+}
+.push{
+height:70px;
+}
 #footer{
 width:930px;
 height:70px;
