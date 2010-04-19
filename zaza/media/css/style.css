@@ -48,7 +48,14 @@ width:930px;
 height:150px;
 background:url(/static/images/banner.jpg) no-repeat center;
 }
-
+.hide{
+visibility:hidden;
+}
+#zaza{
+float:left;
+width:100px;
+height:50px;
+}
 #center_banner{
 width:930px;
 height:200px;
@@ -116,6 +123,19 @@ margin-top:15px;
 }
 .left_box{
 width:250px;
+height:auto;
+background:url(/static/images/box.jpg) no-repeat top;
+padding-top:10px;
+}
+.left_box_border_in{
+width:200px;
+height:auto;
+border:1px #CCCCCC solid;
+padding:2px;
+margin-top:15px;
+}
+.left_box_in{
+width:200px;
 height:auto;
 background:url(/static/images/box.jpg) no-repeat top;
 padding-top:10px;
