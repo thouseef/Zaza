@@ -246,7 +246,7 @@ def search(request):
     page = 0
   if request.user.is_authenticated():
     user = request.user.get_profile()
-    context = {'user':user,'username':request.user,'logged_in':True}
+    context = {'cuser':user,'cusername':request.user,'logged_in':True}
   else:
     context = {'logged_in':False}
   if request.method == 'GET':
