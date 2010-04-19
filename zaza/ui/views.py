@@ -59,10 +59,10 @@ def show_user(request, cuser, user):
   ratings = user.rating_set.order_by('rating').reverse()
   if ((len(ratings)-1) / 5) > page:
     context['next'] = True
-    context['npage'] = page+1
+  context['npage'] = page+1
   if page > 0:
     context['prev'] = True
-    context['ppage'] = page-1
+  context['ppage'] = page-1
   context['pages'] = (len(ratings) / 5) + 1
   context['ratings'] = ratings[5*page:5*(page+1)]
   recos = user.recommends_set.all()
@@ -165,10 +165,10 @@ def book_view(request, isbn):
   ratings = book.rating_set.order_by('rating').reverse()
   if ((len(ratings)-1) / 5) > page:
     context['next'] = True
-    context['npage'] = page+1
+  context['npage'] = page+1
   if page > 0:
     context['prev'] = True
-    context['ppage'] = page-1
+  context['ppage'] = page-1
   context['pages'] = (len(ratings) / 5) + 1
   context['ratings'] = ratings[5*page:5*(page+1)]
   return render_to_response("zaza/book.html",context)
@@ -255,10 +255,10 @@ def search(request):
     books = Book.objects.filter(Q(title__contains=query) | Q(author__contains=query)).distinct()
     if ((len(books)-1) / 5) > page:
       context['next'] = True
-      context['npage'] = page+1
+    context['npage'] = page+1
     if page > 0:
       context['prev'] = True
-      context['ppage'] = page-1
+    context['ppage'] = page-1
     context['pages'] = (len(books) / 5) + 1
     context['books'] = books[5*page:5*(page+1)]
   else:
