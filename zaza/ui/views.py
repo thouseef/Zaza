@@ -89,8 +89,9 @@ def user_profile(request):
   user = request.user.get_profile()
   return render_to_response('zaza/profile.html',user)
 
-def user_profile_edit(request):
+def user_update(request):
   pass
+  
 
 def book_add():
   pass

@@ -14,14 +14,15 @@
       <img src="{{ reco.imgs }}"class="pic"/>
       <a href='/book/{{reco.isbn}}'>{{ reco.title }}</a>
     </div>
-    <div class="content">
-      <span style="color:#7B0E10; padding:0px;">Isbn No: {{ reco.isbn }} </span>
-      <span style="color:#7B0E10; padding:10px;">Author: {{ reco.author }} </span>
-    </div>
-    <div class="clear"></div>    
-    {% endfor %}
+      <div class="content">
+	<span style="color:#7B0E10; padding:0px;">Isbn No: {{ reco.isbn }} </span>
+	<span style="color:#7B0E10; padding:10px;">Author: {{ reco.author }} </span>
+      </div>
+      <div class="clear"></div>    
+      {% endfor %}
   </div>
 </div>
+
 <div class="right_box">
   <div class="title">Books you have rated : </div>
   {% for rating in ratings %}

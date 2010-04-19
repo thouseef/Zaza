@@ -69,8 +69,10 @@
 		<div id="login">
 		  <p id="login-form">{{ user.location }}</p>
 		</div>
-		<input type="button" name="logout" value="Logout" class="logout" id="logout" onclick=window.location="/accounts/logout" />
-		<a href = '{% url zaza.ui.views.logout %}'>Logout</a>
+		<div style="padding-bottom:5px;">
+		  <input type="button" name="update" value="Update Profile" id="update" onclick=window.loacation="/accounts/profile/update/"/>
+		</div>
+		<input type="button" name="logout" value="Logout" class="logout" id="logout" onclick=window.location="/accounts/logout"  />
 	      </div>
 	    </div> 
 	    {% endif %}
