@@ -48,6 +48,14 @@ width:930px;
 height:150px;
 background:url(/static/images/banner.jpg) no-repeat center;
 }
+#top_banner_link{
+display:block;
+width:200px;
+height:105px;
+text-indent:-9999px;
+z-index:5;
+background:url(/static/images/logo.gif) no-repeat center;
+}
 .hide{
 visibility:hidden;
 }
@@ -96,7 +104,7 @@ background-color:#FFFFFF;
 /*------top menu---------*/
 ul.menu {
 list-style-type:none; float:right; display:block; width:500px; height:18px; 
-clear:both; margin-top:100px; padding:0;}
+clear:both; margin-top:5px; padding-right:10px;}
 
 ul.menu li {
 display:inline;}
