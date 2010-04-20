@@ -129,6 +129,17 @@ def book_add():
 def book_browse():
   pass
 
+@login_required
+def del_rating(request, isbn):
+  context = {}
+  u = request.user
+  Rating.objects.get(user__username=u.username, book__isbn=isbn).delete()
+  userp = u.get_profile()
+  userp.stale=True
+  userp.save()
+  return user(request)
+  
+
 def book_rated(request):
   context = {}
   user = request.user

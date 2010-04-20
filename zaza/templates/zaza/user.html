@@ -41,6 +41,7 @@
     {% show_stars rat.rating of 10 round to half %}<br/>
   </span>
   <span id="rateStatus"></span>
+  <span><a href="/book/{{rat.book.isbn}}/deleterating">delete</a></span>
       </div>
       <div class="clear"></div>    
       {% endfor %}
