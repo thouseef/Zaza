@@ -95,11 +95,12 @@ def user_reg(request):
       userprofile.save()
       r = Recommends()
       r.user = user
-      r.rec1 = Book.objects.all().extra(order_by=['rating'])[:20][random.randint(0,19)]
-      r.rec2 = Book.objects.all().extra(order_by=['rating'])[:20][random.randint(0,19)]
-      r.rec3 = Book.objects.all().extra(order_by=['rating'])[:20][random.randint(0,19)]
-      r.rec4 = Book.objects.all().extra(order_by=['rating'])[:20][random.randint(0,19)]
-      r.rec5 = Book.objects.all().extra(order_by=['rating'])[:20][random.randint(0,19)]
+      pbooks = userprofile.getPopularBooks()
+      r.rec1 = pbooks[0][0]
+      r.rec2 = pbooks[1][0]
+      r.rec3 = pbooks[2][0]
+      r.rec4 = pbooks[3][0]
+      r.rec5 = pbooks[4][0]
       r.save()
       response.update({'success': True})
     else:
