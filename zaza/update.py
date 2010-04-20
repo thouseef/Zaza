@@ -4,10 +4,13 @@ setup_environ(settings)
 from ui.models import *
 import time
 
-#users = UserProfile.objects.filter(stale=False)
-#for userp in users:
-#  userp.stale = True
-#  userp.save()
+staleAll=False
+
+if staleAll:
+  users = UserProfile.objects.filter(stale=False)
+  for userp in users:
+    userp.stale = True
+    userp.save()
 
 while True:
   users = UserProfile.objects.filter(stale=True)

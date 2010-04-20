@@ -56,10 +56,10 @@ class UserProfile(models.Model):
         i *= 2
       threshold = i
       users = getSimilarUsers_(books, susers, threshold)
-      if users.count() < 20:
+      if users.count() < 10:
         threshold = (3 * i) / 4
         users = getSimilarUsers_(books, susers, threshold)
-        if users.count() < 10:
+        if users.count() < 5:
           threshold = i / 2
           users = getSimilarUsers_(books, susers, threshold)
         break
@@ -96,10 +96,10 @@ class UserProfile(models.Model):
       for book in user2.get_profile().getBooks():
         books[book] = books.get(book, 0) + 1
     print "  Considering %s books" % len(books),
-    for i in range(20):
+    for i in range(50):
       threshold = i
       newbooks = filter(lambda x: x[1]>threshold, books.iteritems())
-      if len(newbooks) < 100:
+      if len(newbooks) < 50:
         break
     if len(newbooks) == 0:
       threshold -= 1
