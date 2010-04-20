@@ -95,17 +95,18 @@ def user_reg(request):
       r = Recommends()
       r.user = user
       pbooks = userprofile.getPopularBooks()
-      r.rec1 = pbooks[0][0]
-      r.rec2 = pbooks[1][0]
-      r.rec3 = pbooks[2][0]
-      r.rec4 = pbooks[3][0]
-      r.rec5 = pbooks[4][0]
+      r.rec1 = Book.objects.get(isbn=pbooks[0][0])
+      r.rec2 = Book.objects.get(isbn=pbooks[1][0])
+      r.rec3 = Book.objects.get(isbn=pbooks[2][0])
+      r.rec4 = Book.objects.get(isbn=pbooks[3][0])
+      r.rec5 = Book.objects.get(isbn=pbooks[4][0])
       r.save()
       response.update({'success': True})
     else:
       response.update({'success': False})
       response.update({'errors':form.errors})
-      return HttpResponse(response)
+      response.update({'form':form})
+    return render_to_response("registration/success.html",response)
   else:
     form = UserForm()
   return render_to_response("registration/register.html",{'form':form})
@@ -237,8 +238,6 @@ def edit_comment(request, isbn, id):
     comment.delete()
     return HttpResponse("")
 
-def results_search():
-  pass
 
 def search(request):
   context = {}

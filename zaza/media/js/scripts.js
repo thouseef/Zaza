@@ -12,7 +12,7 @@ $(document).ready(function(){
 	$("div.right_box").load(query+' .right_box');
     });
     $("input#New").click(function(){
-	$("div#right_section").load("/register");
+	$("div#right_section").load('/register');
     });
 });
   

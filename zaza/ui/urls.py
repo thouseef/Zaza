@@ -24,6 +24,7 @@ urlpatterns = patterns('',
                        (r'^accounts/profile/update/','zaza.ui.views.user_update'),
                        (r'^accounts/(\w+)/$', 'zaza.ui.views.other_user'),
                        (r'^register/$','zaza.ui.views.user_reg'),
+                       (r'^register/success/$','zaza.ui.views.user_reg'),
                        (r'^admin/', include(admin.site.urls)),
 
 )
