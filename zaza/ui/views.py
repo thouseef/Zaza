@@ -34,8 +34,10 @@ def logout(request):
   else:
     return HttpResponseRedirect('/')
 
-@login_required
+
 def user(request):
+  if not request.user.is_authenticated():
+    return HttpResponseRedirect('/')
   user = request.user
   return show_user(request, user, user)
 
