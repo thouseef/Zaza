@@ -58,10 +58,10 @@ class UserProfile(models.Model):
         i *= 2
       threshold = i
       users = getSimilarUsers_(books, susers, threshold)
-      if users.count() < 10:
+      if users.count() < 20:
         threshold = (3 * i) / 4
         users = getSimilarUsers_(books, susers, threshold)
-        if users.count() < 5:
+        if users.count() < 10:
           threshold = i / 2
           users = getSimilarUsers_(books, susers, threshold)
         break
@@ -101,7 +101,7 @@ class UserProfile(models.Model):
     for i in range(50):
       threshold = i
       newbooks = filter(lambda x: x[1]>threshold, books.iteritems())
-      if len(newbooks) < 50:
+      if len(newbooks) < 100:
         break
     if len(newbooks) == 0:
       threshold -= 1
