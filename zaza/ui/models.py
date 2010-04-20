@@ -31,6 +31,8 @@ class UserProfile(models.Model):
 
   def getMeanRating(self):
     avg = self.user.rating_set.all().aggregate(Avg('rating')).get('rating__avg', 0.0)
+    if not avg:
+      avg = 0.0
     if avg > 5:
       return avg - 0.5
     else:
