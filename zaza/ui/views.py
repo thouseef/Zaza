@@ -79,7 +79,6 @@ def show_user(request, cuser, user):
 
 def user_reg(request):
   if request.method == 'POST':
-    xhr = request.GET.has_key('xhr')
     response = {}
     form = UserForm(request.POST)
     if form.is_valid():
@@ -105,10 +104,7 @@ def user_reg(request):
     else:
       response.update({'success': False})
       response.update({'errors':form.errors})
-    if xhr:
-      return HttpResponse(simplejson.dumps(response), mimetype='application/javascript')      
-    else:
-      return HttpResponseRedirect("/user/")
+      return HttpResponse(response)
   else:
     form = UserForm()
   return render_to_response("registration/register.html",{'form':form})

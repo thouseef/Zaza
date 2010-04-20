@@ -1,7 +1,7 @@
 import operator
 import math
 from django.db import models
-from django.forms import ModelForm, CharField, IntegerField, Textarea
+from django.forms import ModelForm, CharField, IntegerField, Textarea, PasswordInput
 from django.contrib.auth.models import User
 from django.forms.models import inlineformset_factory
 from django.db.models import Avg, Count
@@ -113,7 +113,7 @@ class UserProfile(models.Model):
 
 class UserForm(ModelForm):
   username = CharField(max_length=16)
-  password = CharField(max_length=16)
+  password = CharField(max_length=16,widget=PasswordInput)
   location = CharField(max_length=128)
   age = IntegerField()
   class Meta:
